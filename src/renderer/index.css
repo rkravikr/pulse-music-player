@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dynamic accent color – overridden by settingsStore at runtime */
+:root {
+  --accent-h: 199;
+  --accent-s: 89%;
+  --accent-l: 48%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text-primary overflow-hidden h-screen w-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom styling for scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-background-elevated rounded-full transition-all duration-300;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+}
+
+/* Electron App Region Dragging classes */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag-region {
+  -webkit-app-region: no-drag;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(24, 24, 28, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hide focus rings except for keyboard navigation */
+*:focus {
+  outline: none;
+}
+
+/* Custom spin slow animation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 25s linear infinite;
+}
+
+/* Row density overrides */
+[data-density='compact'] .song-row {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+[data-density='comfortable'] .song-row {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Vinyl rotation animation */
+.vinyl-spin {
+  animation: spin-slow 12s linear infinite;
+}
+
+.vinyl-paused {
+  animation-play-state: paused;
+}
+
+/* Music visualizer animation */
+@keyframes bounce-bar {
+  0%, 100% {
+    height: 15%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+.animate-visualizer-bar {
+  animation: bounce-bar 1s ease-in-out infinite;
+}

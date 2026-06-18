@@ -1,0 +1,59 @@
+{
+  "name": "pulse-music-player",
+  "version": "1.0.0",
+  "description": "Modern Offline Desktop Music Player",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "build:main": "node scripts/build.js",
+    "build:renderer": "tsc -p tsconfig.renderer.json && vite build",
+    "build": "npm run build:main && npm run build:renderer",
+    "dev:renderer": "vite",
+    "dev:main": "node scripts/build.js --watch",
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\" \"wait-on http://localhost:5173 && electron .\"",
+    "package": "npm run build && electron-builder"
+  },
+  "keywords": [
+    "music",
+    "player",
+    "electron",
+    "react",
+    "sqlite"
+  ],
+  "author": "Ravi Kumar Verma",
+  "license": "MIT",
+  "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/sortable": "^8.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@tanstack/react-virtual": "^3.14.3",
+    "better-sqlite3": "^11.1.2",
+    "framer-motion": "^11.2.10",
+    "lucide-react": "^0.395.0",
+    "music-metadata": "^7.14.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "electron": "^31.0.1",
+    "electron-builder": "^24.13.3",
+    "esbuild": "^0.21.5",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.13",
+    "wait-on": "^7.2.0"
+  },
+  "allowScripts": {
+    "electron@31.7.7": true,
+    "esbuild@0.21.5": true,
+    "better-sqlite3@11.10.0": true
+  }
+}

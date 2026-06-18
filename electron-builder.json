@@ -1,0 +1,46 @@
+{
+  "appId": "com.pulse.musicplayer",
+  "productName": "Pulse",
+  "copyright": "Copyright © 2024 Pulse",
+  "directories": {
+    "output": "dist/installers",
+    "buildResources": "resources"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json",
+    "!dist/installers/**"
+  ],
+  "extraResources": [
+    {
+      "from": "resources/icon.ico",
+      "to": "icon.ico"
+    }
+  ],
+  "win": {
+    "icon": "resources/icon.ico",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ],
+    "requestedExecutionLevel": "asInvoker"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Pulse",
+    "installerIcon": "resources/icon.ico",
+    "uninstallerIcon": "resources/icon.ico",
+    "installerHeaderIcon": "resources/icon.ico",
+    "deleteAppDataOnUninstall": false
+  },
+  "asar": true,
+  "asarUnpack": [
+    "**/node_modules/better-sqlite3/**/*",
+    "**/node_modules/music-metadata/**/*"
+  ]
+}
