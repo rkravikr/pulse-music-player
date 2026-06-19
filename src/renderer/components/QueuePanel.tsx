@@ -23,9 +23,10 @@ import { useState } from 'react';
 
 interface QueuePanelProps {
   onClose: () => void;
+  embedded?: boolean;
 }
 
-export default function QueuePanel({ onClose }: QueuePanelProps) {
+export default function QueuePanel({ onClose, embedded }: QueuePanelProps) {
   const { queue, queueIndex, currentSong, isPlaying, playSong, removeFromQueue, clearQueue, reorderQueue } = usePlaybackStore();
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -67,8 +68,8 @@ export default function QueuePanel({ onClose }: QueuePanelProps) {
 
   return (
     <aside
-      className="w-80 flex flex-col h-full flex-shrink-0 z-10 relative"
-      style={{
+      className={`flex flex-col h-full flex-shrink-0 z-10 relative ${embedded ? 'w-full' : 'w-80'}`}
+      style={embedded ? {} : {
         background: 'rgba(15, 15, 17, 0.72)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',

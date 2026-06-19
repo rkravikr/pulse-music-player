@@ -32,6 +32,8 @@ export interface ElectronDatabaseAPI {
   isSongLiked: (songId: string) => Promise<boolean>;
   addRecentlyPlayed: (songId: string) => Promise<boolean>;
   getRecentlyPlayed: () => Promise<any[]>;
+  getTopArtists: () => Promise<{ artist: string, trackCount: number }[]>;
+  getGenres: () => Promise<{ genre: string, trackCount: number }[]>;
   getLibraryStats: () => Promise<{ foldersCount: number; folders: string[]; songsCount: number; albumsCount: number; likedCount: number }>;
   // Settings extras
   getAppInfo: () => Promise<{ version: string; userDataPath: string; dbPath: string }>;
@@ -83,6 +85,8 @@ const databaseAPI: ElectronDatabaseAPI = {
   isSongLiked: (songId) => ipcRenderer.invoke('is-song-liked', songId),
   addRecentlyPlayed: (songId) => ipcRenderer.invoke('add-recently-played', songId),
   getRecentlyPlayed: () => ipcRenderer.invoke('get-recently-played'),
+  getTopArtists: () => ipcRenderer.invoke('get-top-artists'),
+  getGenres: () => ipcRenderer.invoke('get-genres'),
   getLibraryStats: () => ipcRenderer.invoke('get-library-stats'),
   getAppInfo: () => ipcRenderer.invoke('get-app-info'),
   openUserData: () => ipcRenderer.invoke('open-user-data'),

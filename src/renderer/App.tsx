@@ -4,7 +4,7 @@ import { usePlaybackStore } from './store/playbackStore';
 import { useSettingsStore } from './store/settingsStore';
 import Sidebar from './components/Sidebar';
 import Titlebar from './components/Titlebar';
-import PlayerBar from './components/PlayerBar';
+import RightPlayerBar from './components/RightPlayerBar';
 import QueuePanel from './components/QueuePanel';
 import SongsPage from './pages/SongsPage';
 import AlbumsPage from './pages/AlbumsPage';
@@ -61,27 +61,26 @@ export default function App() {
       <Titlebar />
 
       <div className="flex-1 flex overflow-hidden">
-        {/* Navigation Sidebar */}
+        {/* Navigation Sidebar (Left) */}
         <Sidebar />
 
-        {/* Primary Page Content Wrapper */}
+        {/* Primary Page Content Wrapper (Center) */}
         <main className="flex-1 flex flex-col overflow-hidden bg-background relative">
           {/* Subtle design accents */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute bottom-10 left-10 w-80 h-80 bg-accent-light/5 rounded-full blur-[100px] pointer-events-none" />
 
           {/* Render Active Page */}
-          <div className="flex-1 overflow-y-auto p-6 relative z-10">
+          <div className="flex-1 overflow-y-auto relative z-10 p-6">
             {renderActiveView()}
           </div>
         </main>
 
-        {/* Play Queue Side Panel */}
-        {isQueueOpen && <QueuePanel onClose={() => setIsQueueOpen(false)} />}
+        {/* The Right Sidebar Column */}
+        <div className="h-full border-l border-white/[0.02] bg-background-surface/20 flex flex-col z-20 shrink-0 w-80">
+          <RightPlayerBar onQueueToggle={() => setIsQueueOpen(!isQueueOpen)} isQueueOpen={isQueueOpen} />
+        </div>
       </div>
-
-      {/* Bottom Media Player Bar */}
-      <PlayerBar onQueueToggle={() => setIsQueueOpen(!isQueueOpen)} isQueueOpen={isQueueOpen} />
     </div>
   );
 }

@@ -664,6 +664,38 @@ function setupIpcHandlers() {
     }
   });
 
+  ipcMain.handle('get-top-artists', () => {
+    try {
+      return dbManager.query<{ artist: string, trackCount: number }>(`
+        SELECT artist, COUNT(*) as trackCount 
+        FROM songs 
+        WHERE artist IS NOT NULL AND artist != ''
+        GROUP BY artist 
+        ORDER BY trackCount DESC 
+        LIMIT 10
+      `);
+    } catch (err) {
+      console.error('[Database] Failed to get top artists:', err);
+      return [];
+    }
+  });
+
+  ipcMain.handle('get-genres', () => {
+    try {
+      return dbManager.query<{ genre: string, trackCount: number }>(`
+        SELECT genre, COUNT(*) as trackCount 
+        FROM songs 
+        WHERE genre IS NOT NULL AND genre != ''
+        GROUP BY genre 
+        ORDER BY trackCount DESC 
+        LIMIT 20
+      `);
+    } catch (err) {
+      console.error('[Database] Failed to get genres:', err);
+      return [];
+    }
+  });
+
   /* -----------------------------------------------------------------------
      New settings-related IPC handlers
   ----------------------------------------------------------------------- */
